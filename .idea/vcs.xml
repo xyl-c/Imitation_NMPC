@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/GAZEBO_sim/src/NMPC_PX4_PKG _NN" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/REAL_World_exp/src/px4_msgs" vcs="Git" />
+  </component>
+</project>
