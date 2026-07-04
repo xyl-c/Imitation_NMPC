@@ -31,7 +31,6 @@ Install the following:
 - **...**(Other commonly used packages)
 
 The dependencies are all commonly used packages for PX4-ROS2-GAZEBO simulation. 
-For the installation of ACADOS, please refer to project https://github.com/evannsmc/nmpc_acados_px4.git. 
 
 ## Clone Project
 1. Clone directory (**NMPC_PX4_PKG_NN**) into your ROS2 workspace's source directory and build:
