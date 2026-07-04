@@ -6,7 +6,6 @@ This project includes 5 nodes.
 'nmpc_mavros' is quadrotor NMPC control node which control output are thrust and three-axis angular velocities.
 'test_thrust' is the node for testing the throttle thrust curve.
 
-This project partially utilizes code from project https://github.com/evannsmc/nmpc_acados_px4.git. 
 
 
 ## Prerequisites
@@ -23,7 +22,6 @@ Install the following:
 - **...**(Other commonly used packages)
 
 The dependencies are all commonly used packages for ROS2-PX4-Quadrotors. 
-For the installation of ACADOS, please refer to project https://github.com/evannsmc/nmpc_acados_px4.git. 
 
 This project uses VINS-Fusion for navigation, and VINS-Fusion [https://github.com/zinuok/VINS-Fusion-ROS2.git] needs to be installed before use.
 If other positioning sources are used, make corresponding modifications in the program.
