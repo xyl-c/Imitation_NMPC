@@ -1,7 +1,6 @@
 #  IMPC and NMPC for quadrotor PX4-ROS2-GAZEBO Simulation
 This project includes two nodes. The node 'nmpc_output_thrust_torque' is the quadrotor NMPC control simulation node, while 'nnc_quad' is the IMPC control simulation node.
 The control variables of this program are the total thrust of the quadrotor and the three-axis control moments, utilizing the OffBoard mode for the total thrust and three-axis control moments of PX4.
-This project partially utilizes code from project https://github.com/evannsmc/nmpc_acados_px4.git.
 
 
 ## Prerequisites
@@ -18,7 +17,6 @@ Install the following:
 - **...**(Other commonly used packages)
 
 The dependencies are all commonly used packages for PX4-ROS2-GAZEBO simulation. 
-For the installation of ACADOS, please refer to project https://github.com/evannsmc/nmpc_acados_px4.git. 
 
 ## Clone Project
 1. Clone directory (**NMPC_PX4_PKG_NN**) into your ROS2 workspace's source directory and build:
