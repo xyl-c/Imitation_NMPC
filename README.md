@@ -14,7 +14,6 @@ This project provides a numerical comparison between IMPC and NMPC for quadrotor
 # 2. Project - GAZEBO_sim -  IMPC and NMPC for quadrotor PX4-ROS2-GAZEBO Simulation
 This project includes two nodes. The node 'nmpc_output_thrust_torque' is the quadrotor NMPC control simulation node, while 'nnc_quad' is the IMPC control simulation node.
 The control variables of this program are the total thrust of the quadrotor and the three-axis control moments, utilizing the OffBoard mode for the total thrust and three-axis control moments of PX4.
-This project partially utilizes code from project https://github.com/evannsmc/nmpc_acados_px4.git.
 
 
 ## Prerequisites
@@ -81,8 +80,6 @@ This project includes 5 nodes.
 'pub_vs' is the node publish VINS to PX4.
 'nmpc_mavros' is quadrotor NMPC control node which control output are thrust and three-axis angular velocities.
 'test_thrust' is the node for testing the throttle thrust curve.
-
-This project partially utilizes code from project https://github.com/evannsmc/nmpc_acados_px4.git. 
 
 
 ## Prerequisites
