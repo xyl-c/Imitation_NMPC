@@ -2,8 +2,6 @@ import casadi as ca
 import numpy as np
 
 
-
-
 class QuadrotorModel(object):
     def __init__(self, horizon, N):
         self.Ts = horizon/N
@@ -16,11 +14,6 @@ class QuadrotorModel(object):
             0.005544
         ])
 
-        # self.g = 9.81
-        # self.m = 1.2
-        # self.I = np.diag([0.014, 0.014, 0.028])
-        # self.l = 0.225
-        # self.k_m = 0.2
 
         self.nx = 13
         self.nu = 4
@@ -48,14 +41,6 @@ class QuadrotorModel(object):
         self.wz_max = 1.0
         self.wz_min = -1.0
 
-
-        # self.Q = np.diag([10.0, 10.0, 10.0, 10.0])
-        # self.R = np.diag([0.001, 0.0001, 0.0001, 0.0001])
-        # self.R_du = np.diag([0.001, 0.0001, 0.0001, 0.0001])
-
-        # self.Q = np.diag([200., 200., 500., 200.])
-        # self.R = np.diag([1., 300., 300.0, 300.0])
-        # self.R = np.diag([1., 1., 1.0, 1.0])
 
         self.Q = np.diag([200., 200., 500., 200.])
         self.R = np.diag([1., 300., 500.0, 300.0])
@@ -177,106 +162,3 @@ class QuadrotorModel(object):
         return s_kp1
 
 
-
-# if __name__ == '__main__':
-#     Ts = 0.01
-#     N = 15
-#     model = USVModel(Ts, N)
-#     mpc_solver = MPCSolver(Ts, N, model)
-#
-#     t0 = 0.0  # 初始时间=0
-#     x0 = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0]).reshape(-1, 1)
-#     xs = np.array([5.0, 5.0, 0.0, 0.0, 0.0, 0.0]).reshape(-1, 1)
-#     u0 = np.array([0.0, 0.0]).reshape(-1, 1)
-#
-#     TT = []
-#     t_c = []  # 时间信息
-#     xx = []  #
-#     s_x1 = []  # 存储历史的状态x信息
-#     s_x2 = []  # 存储历史的状态y信息
-#     s_u = []  # 存储历史的控制输入M信息
-#     sim_time = 10/Ts # 仿真时间，步数=sim_time/T
-#     mpciter = 0  # 初始化计数器
-#
-#     # c_p = np.concatenate((x0, xs))  # 将初始状态和最终状态赋值给p
-#     # init_control = ca.reshape(u0, -1, 1)  # 初始化控制输入（N个时域控制输入）
-#     # res = mpc_solver.solver(x0 = init_control, p=c_p, lbg=model.lbg, lbx=model.lbx, ubg=model.ubg, ubx=model.ubx)  # 求解控制问题
-#     # res = mpc_solver.solver(p=c_p, lbg=model.lbg, lbx=model.lbx, ubg=model.ubg, ubx=model.ubx)
-#     # device = torch.device('cuda:0')
-#     # nn_generate = torch.load('traGen_net.pth', weights_only=False)
-#     # nn_generate.eval()
-#     # sample_tra = torch.normal(0, 1, (1, 4), device=device)
-#     # c_p = nn_generate(sample_tra).cpu().detach().numpy()
-#     # print(c_p)
-#     while mpciter - sim_time / Ts < 0.0:
-#         # xs = np.array([np.sin(0.1*mpciter*Ts), 2*np.sin(mpciter*Ts)]).reshape(-1, 1)
-#         c_p = np.concatenate((x0, xs))
-#         # init_control = ca.reshape(u0, -1, 1)
-#         # res = mpc_solver.solver(x0=init_control, p=c_p, lbg=model.lbg, lbx=model.lbx, ubg=model.ubg, ubx=model.ubx)
-#         res = mpc_solver.solver(p=c_p, lbg=model.lbg, lbx=model.lbx, ubg=model.ubg, ubx=model.ubx)
-#         u_sol = ca.reshape(res['x'], model.n_controls, N)  # 得到优化控制输入并将其弄成2*N的形状
-#         uu = np.array(u_sol)
-#         # print(u_sol)
-#         # print(uu.shape)
-#         # nn_controller = torch.load('./bc_su_save/mpcBc_net_dateset1000.pth',weights_only=False)
-#         # nn_controller.eval()
-#         # s = torch.tensor(c_p,dtype=torch.float,device=device).reshape(1,4)
-#         # u_nn = nn_controller(s)
-#         # print(u_nn)
-#
-#         '''
-#         运行模型：
-#         t0=t0+T
-#         x0为下一时刻状态
-#         u0为时域控制输入的后半部分，且最后一个出现两次
-#         u_sol为一个时域的控制输入
-#         '''
-#         x0 = model.step_update(x0, u_sol)  # 运行模型
-#         learn_control = ca.reshape(u_sol, -1, 1)
-#         # print("learn_control:", learn_control)
-#         # print("u_sol:", u_sol)
-#         # print("u0:", u0)
-#
-#         x0 = ca.reshape(x0, -1, 1)  # 整理x0的形状
-#         # print(x0)
-#         t = Ts * mpciter
-#
-#         xx.append(x0.full())  # 将整个时域状态存储到xx中
-#         s_x1.append(x0[0])  # 将整个时域状态x存储到s_x中
-#         s_x2.append(x0[1])  # 将整个时域状态y存储到s_y中
-#         s_u.append(u_sol[0, 0])  # 将整个时域控制输入F存储到u_F中
-#         TT.append(t)
-#         mpciter = mpciter + 1  # 计步器加1
-#
-#     '''保存数据'''
-#     # np.save("s_x.npy",s_x)
-#     # np.save("s_y.npy", s_y)
-#     # np.save("s_psi.npy", s_psi)
-#     # np.save("s_u.npy", s_u)
-#     # np.save("s_v.npy", s_v)
-#     # np.save("s_r.npy", s_r)
-#     '''画图部分'''
-#     s_x1 = np.array(s_x1)
-#     s_x2 = np.array(s_x2)
-#     s_u = np.array(s_u)
-#
-#     print(s_u.shape)
-#     plt.figure()
-#     plt.title('x1x2')
-#     plt.plot(s_x1[:, 0, 0], s_x2[:, 0, 0])
-#     plt.grid()
-#     plt.figure()
-#     plt.title('x1')
-#     plt.plot(s_x1[:, 0, 0])
-#     plt.grid()
-#     plt.figure()
-#     plt.title('x2')
-#     plt.plot(s_x2[:, 0, 0])
-#     plt.grid()
-#     plt.figure()
-#     plt.plot(TT, s_u[:, 0, 0])
-#     plt.xlabel("t(s)")
-#     plt.ylabel("N")
-#     plt.grid()
-#
-#     plt.show()

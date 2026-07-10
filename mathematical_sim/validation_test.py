@@ -137,7 +137,7 @@ def ver_test():
         test_in_q = np.concatenate([test_in[:, :3], q, test_in[:, -7:-1], np.zeros([n_test, 3]), test_in[:, -1:]],
                                    axis=1)
 
-        print(f"测试集：使用 16 个 CPU 核心进行并行 MPC 计算")
+        print(f"Test set: Parallel MPC computation using 16 CPU cores")
         with Pool(processes=16) as pool:
             results = pool.map(parallel_solve_nmpc, test_in_q)
         results = [r for r in results if r is not None]

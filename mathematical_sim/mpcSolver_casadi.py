@@ -57,22 +57,20 @@ class MPCSolver:
         solver = ca.nlpsol('solver', 'ipopt', self.nlp, self.opts)
         return solver
 
-def thrust_allocation(u):
-    # 每个电机推力 [f1, f2, f3, f4]
-    # 布局: 十字型
-    T, Mx, My, Mz = u[0], u[1], u[2], u[3]
-    T_max = 28.0
-    l = 0.15
-    kf = 6.11e-2
-    km = 1.5e-1
-    B = np.array([[kf, kf, kf, kf],
-                  [0, l*kf, 0, -l*kf],
-                  [-l*kf, 0, l*kf, 0],
-                  [km, -km, km, -km]])
-    FM = np.array([T, Mx, My, Mz])
-    f = np.linalg.solve(B, FM)
-    f = np.clip(f, 0, T_max/4)
-    return f
+# def thrust_allocation(u):
+#     T, Mx, My, Mz = u[0], u[1], u[2], u[3]
+#     T_max = 28.0
+#     l = 0.15
+#     kf = 6.11e-2
+#     km = 1.5e-1
+#     B = np.array([[kf, kf, kf, kf],
+#                   [0, l*kf, 0, -l*kf],
+#                   [-l*kf, 0, l*kf, 0],
+#                   [km, -km, km, -km]])
+#     FM = np.array([T, Mx, My, Mz])
+#     f = np.linalg.solve(B, FM)
+#     f = np.clip(f, 0, T_max/4)
+#     return f
 
 def euler2quan(phi, theta, psi):
     qw = np.cos(phi / 2) * np.cos(theta / 2) * np.cos(psi / 2) + np.sin(phi / 2) * np.sin(theta / 2) * np.sin(psi / 2)
